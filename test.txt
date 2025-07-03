@@ -1,0 +1,3 @@
+lessons 4
+php artisan make:model 'Model name' -m --> make model and migrate
+php artisan migrate --> migrate file to database
