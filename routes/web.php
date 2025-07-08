@@ -1,18 +1,15 @@
 <?php
 
 use App\Http\Controllers\MyPlaceController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-   return view('dashboard');
-});
+Route::get('/posts', [PostController::class, 'read']);
+Route::get('posts/create', [PostController::class, 'create']);
+Route::get('posts/update', [PostController::class, 'update']);
+Route::get('posts/delete', [PostController::class, 'delete']);
 
-Route::get('/my_place', [MyPlaceController::class, 'index']);
-
-Route::get('/1', function () {
-    return 'this is first page';
-});
