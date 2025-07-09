@@ -2,8 +2,29 @@ lesson 5, 6
 php artisan make:model 'Model name' -m --> make model and migrate
 php artisan migrate --> migrate file to database
 
-lesson 11
+lesson 12
 $table->softDeletes();
 use SoftDeletes;
 withTrashed()->find(2);
+
+lesson 13
+firstOrCreate();
+updateOrCreate();
+
+lesson 14
+ php artisan make:migration add_column_description_to_posts_table;
+ php artisan migrate;
+ php artisan migrate:rollback;
+ $table->text('description')->nullable()->after('content');
+
+ php artisan make:migration edit_column_content_to_posts_table;
+ $table->renameColumn('post_content', 'content' );
+
+ dropIfExists('table_name');
+
+
+lesson 15
+@section('some_name') @endsection
+
+
 

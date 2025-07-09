@@ -8,14 +8,12 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index() {
-        $posts = Post::where('is_published', 1)->get();
-        foreach ($posts as $post) {
-            dump($post->content);
+        return view('posts');
 
-        }
+
 
     }
-//    public function create() {
+    public function create() {
 //        $postsArr = [
 //            [
 //                'title' => 'title of post from phpstorm',
@@ -38,33 +36,75 @@ class PostController extends Controller
 //                Post::create($post);
 //            }
 //        }
-//        Post::create([
-//            'title' => 'anoother title of post from phpstorm',
-//            'content' => 'another some intersting content',
-//            'image' => 'another image.jpg',
-//            'likes' => '50',
-//            'is_published' => '1',
-//        ]);
-//        dd("created");
-//    }
+        Post::create([
+            'title' => 'anoother title of post from phpstorm',
+            'post_content' => 'another some intersting content',
+            'image' => 'another image.jpg',
+            'likes' => '50',
+            'is_published' => '1',
+        ]);
+        dd("created");
+    }
 
     public function update() {
-       $post = Post::find(4);
+       $post = Post::find(1);
        $post->update([
-            'title' => 'updated title',
-            'content' => 'updated content ',
-            'image' => 'updated image',
-            'likes' => '23',
-            'is_published' => '23',
+            'title' => 'first title',
+            'post_content' => 'first content ',
+            'image' => 'first image',
+            'likes' => '30',
+            'is_published' => '0',
        ]);
        dd("updated");
     }
 
     public function delete() {
         $post = Post::withTrashed()->find(3);
-        $post->delete();
+        $post->restore();
         dd('deleted');
     }
+
+    public function firstOrCreate()
+    {
+        $anotherPost = [
+            'title' => 'some post',
+            'content' => 'some content',
+            'image' => 'some image',
+            'likes' => '500000',
+            'is_published' => 1
+        ];
+
+        $post = Post::firstOrCreate([
+            'title' => 'first title'
+        ],
+        [
+            'title' => 'some posttt',
+            'content' => 'some contenttt',
+            'image' => 'some imagee',
+            'likes' => '200000',
+            'is_published' => 0
+        ]) ;
+        dump($post->title);
+        dd('finished');
+
+    }
+
+    public function updateOrCreate(){
+        $post = Post::updateOrCreate([
+            'title' => 'some postt'
+    ],
+    [
+        'title' => 'first title',
+        'content' => 'first content',
+        'image' => 'first image',
+        'likes' => '50',
+        'is_published' => 1
+
+    ]);
+        dump($post->title);
+        dump('finished');
+    }
+
 
 
 
