@@ -23,8 +23,25 @@ lesson 14
  dropIfExists('table_name');
 
 
-lesson 15
-@section('some_name') @endsection
+lesson 15, 16
+@extends('layout.main')
+@section('content') @endsection
+
+@yield('content')
+
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+
+<li><a href="{{route('main.index')}}">main</a></li>
 
 
+lesson 17
+composer require laravel/ui
+php artisan ui bootstrap
+npm install
+npm run dev
 
+@vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+
+lesson 18
+@csrf -> when i pass submit buton i will in the store page
