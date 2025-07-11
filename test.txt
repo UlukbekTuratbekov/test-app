@@ -44,4 +44,5 @@ npm run dev
 
 
 lesson 18
-@csrf -> when i pass submit buton i will in the store page
+@csrf -> when i  pass submit button i will in the store page
+redirect()->route

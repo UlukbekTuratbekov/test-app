@@ -18,14 +18,26 @@ class PostController extends Controller
         return view('post.create');
     }
 
-    public function store() {
+    public function store()
+    {
         $data = request()->validate([
             'title' => '',
             'post_content' => '',
             'image' => ''
 
         ]);
-        dd($data);
+        Post::create($data);
+        return redirect()->route('post.index');
+    }
+
+    public function show(Post $post)
+    {
+       return view('post.show', compact('post'));
+    }
+
+    public function edit(Post $post)
+    {
+        return view('post.edit', compact('post'));
     }
 
 
@@ -33,22 +45,31 @@ class PostController extends Controller
 
 
 
-    public function update() {
-       $post = Post::find(1);
-       $post->update([
-            'title' => 'first title',
-            'post_content' => 'first content ',
-            'image' => 'first image',
-            'likes' => '30',
-            'is_published' => '0',
-       ]);
-       dd("updated");
+
+
+    public function update(Post $post) {
+        $data = request()->validate([
+            'title' => 'string',
+            'post_content' => 'string',
+            'image' => 'string'
+        ]);
+        $post->update($data);
+        return redirect()->route('post.show', $post->id);
     }
 
-    public function delete() {
-        $post = Post::withTrashed()->find(3);
+
+
+
+
+
+
+
+
+
+    public function destroy(Post $post) {
+//        $post = Post::withTrashed()->find(3);
         $post->delete();
-        dd('deleted');
+        return redirect()->route('post.index');
     }
 
     public function firstOrCreate()
