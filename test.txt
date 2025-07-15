@@ -46,3 +46,25 @@ npm run dev
 lesson 18
 @csrf -> when i  pass submit button i will in the store page
 redirect()->route
+
+lesson 19
+return $this->hasMany(Post::class,  'category_id', 'id');
+return $this->belongsTo(Category::class, 'category_id', 'id');
+
+
+lesson 20
+return $this->belongsToMany(Tag::class, 'post_tags', 'post_id','tag_id');
+
+lesson 22
+protected $guarded = false;
+
+$tags = $data['tags'];
+unset($data['tags']);
+$post = Post::create($data);
+$post->tags()->attach($tags);
+
+$tags = $data['tags'];
+        unset($data['tags']);
+
+        $post->update($data);
+        $post->tags()->sync($tags);

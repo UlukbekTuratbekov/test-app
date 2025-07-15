@@ -6,6 +6,9 @@
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" name="title" class="form-control" id="title" placeholder="Title">
+{{--            @error('title')--}}
+{{--                <div class="alert alert-danger">{{$message}} </div>--}}
+{{--            @enderror--}}
         </div>
 
         <div class="mb-3">
@@ -16,6 +19,24 @@
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
             <input type="text" name="image" class="form-control" id="image" placeholder="Image">
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <select class="form-select" id="category" name="category_id">
+                @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->title}}</option>
+                @endforeach
+
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="tags" class="form-label">Tags</label>
+            <select multiple class="form-select" id="tags" name="tags[]">
+                @foreach($tags as $tag)
+                    <option value="{{$tag->id}}">{{$tag->title}}</option>
+                @endforeach
+            </select>
+            <div class="form-text">Hold Ctrl (Windows) or Cmd (Mac) to select multiple.</div>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

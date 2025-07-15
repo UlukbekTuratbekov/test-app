@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostTag;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $posts = Post::all();
         return view('post.index', compact('posts'));
 
 
-
     }
-    public function create() {
-        return view('post.create');
+
+    public function create()
+    {
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('post.create', compact('categories', 'tags'));
     }
 
     public function store()
@@ -23,50 +30,54 @@ class PostController extends Controller
         $data = request()->validate([
             'title' => '',
             'post_content' => '',
-            'image' => ''
+            'image' => '',
+            'category_id' => '',
+            'tags' => 'nullable|array'
 
         ]);
-        Post::create($data);
+        $tags = $data['tags'] ?? [];
+        unset($data['tags']);
+
+        $post = Post::create($data);
+        $post->tags()->attach($tags);
+
+
         return redirect()->route('post.index');
     }
 
     public function show(Post $post)
     {
-       return view('post.show', compact('post'));
+        return view('post.show', compact('post'));
     }
 
     public function edit(Post $post)
     {
-        return view('post.edit', compact('post'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('post.edit', compact('post', 'categories', 'tags'));
     }
 
 
-
-
-
-
-
-
-    public function update(Post $post) {
+    public function update(Post $post)
+    {
         $data = request()->validate([
             'title' => 'string',
             'post_content' => 'string',
-            'image' => 'string'
+            'image' => 'string',
+            'category_id' => '',
+            'tags' => ''
         ]);
+        $tags = $data['tags'];
+        unset($data['tags']);
+
         $post->update($data);
+        $post->tags()->sync($tags);
         return redirect()->route('post.show', $post->id);
     }
 
 
-
-
-
-
-
-
-
-
-    public function destroy(Post $post) {
+    public function destroy(Post $post)
+    {
 //        $post = Post::withTrashed()->find(3);
         $post->delete();
         return redirect()->route('post.index');
@@ -85,40 +96,34 @@ class PostController extends Controller
         $post = Post::firstOrCreate([
             'title' => 'first title'
         ],
-        [
-            'title' => 'some posttt',
-            'content' => 'some contenttt',
-            'image' => 'some imagee',
-            'likes' => '200000',
-            'is_published' => 0
-        ]) ;
+            [
+                'title' => 'some posttt',
+                'content' => 'some contenttt',
+                'image' => 'some imagee',
+                'likes' => '200000',
+                'is_published' => 0
+            ]);
         dump($post->title);
         dd('finished');
 
     }
 
-    public function updateOrCreate(){
+    public function updateOrCreate()
+    {
         $post = Post::updateOrCreate([
             'title' => 'some postt'
-    ],
-    [
-        'title' => 'first title',
-        'content' => 'first content',
-        'image' => 'first image',
-        'likes' => '50',
-        'is_published' => 1
+        ],
+            [
+                'title' => 'first title',
+                'content' => 'first content',
+                'image' => 'first image',
+                'likes' => '50',
+                'is_published' => 1
 
-    ]);
+            ]);
         dump($post->title);
         dump('finished');
     }
-
-
-
-
-
-
-
 
 
 }
