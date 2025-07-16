@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user2s', function (Blueprint $table) {
+        Schema::create('post_tag', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('age')->nullable();
+
+            $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('tag_id');
+
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user2s');
+        Schema::dropIfExists('post_tag');
     }
 };

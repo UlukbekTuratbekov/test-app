@@ -28,14 +28,14 @@ class PostController extends Controller
     public function store()
     {
         $data = request()->validate([
-            'title' => '',
-            'post_content' => '',
-            'image' => '',
-            'category_id' => '',
+            'title' => 'required|string',
+            'post_content' => 'required|string',
+            'image' => 'required|string',
+            'category_id' => 'nullable|integer',
             'tags' => 'nullable|array'
 
         ]);
-        $tags = $data['tags'] ?? [];
+        $tags = $data['tags'];
         unset($data['tags']);
 
         $post = Post::create($data);
