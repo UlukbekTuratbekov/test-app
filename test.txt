@@ -72,3 +72,21 @@ $tags = $data['tags'];
 
 lesson 27
 php artisan make:request (class_name)
+
+
+lesson 29
+php artisan make:factory PostFactory -m=Post
+php artisan migrate --seed
+use HasFactory
+factory()
+faker()
+
+
+lesson 30
+$posts = Post::paginate(10);
+{{$posts->links()}}
+php artisan vendor:publish --tag=laravel-pagination
+
+
+
+
