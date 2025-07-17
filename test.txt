@@ -68,3 +68,7 @@ $tags = $data['tags'];
 
         $post->update($data);
         $post->tags()->sync($tags);
+
+
+lesson 27
+php artisan make:request (class_name)

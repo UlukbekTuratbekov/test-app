@@ -13,8 +13,8 @@
 
         <div class="mb-3">
             <label for="content" class="form-label">Content</label>
-            <textarea class="form-control" name="post_content" id="content" placeholder="Content" >{{old('post_content')}}</textarea>
-            @error('post_content')
+            <textarea class="form-control" name="content" id="content" placeholder="Content" >{{old('post_content')}}</textarea>
+            @error('content')
             <div class="text-danger">{{$message}} </div>
             @enderror
         </div>
