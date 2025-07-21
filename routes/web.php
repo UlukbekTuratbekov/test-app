@@ -3,7 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\Admin\Post\IndexController;
+use App\Http\Controllers\Admin\Post\IndexController as IndexAdmin;
 use App\Http\Controllers\Post\CreateController;
 use App\Http\Controllers\Post\DestroyController;
 use App\Http\Controllers\Post\EditController;
@@ -31,7 +31,7 @@ Route::get('/', function () {
 
 
 Route::prefix('/admin')->name('admin.')->group(function () {
-    Route::get('/post', IndexController::class)->name('post.index');
+    Route::get('/post', IndexAdmin::class)->name('post.index');
 });
 
 
