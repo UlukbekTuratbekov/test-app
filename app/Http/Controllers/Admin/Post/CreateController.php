@@ -14,9 +14,10 @@ class CreateController extends BaseController
 
     public function __invoke()
     {
+        $posts = Post::paginate(10);
         $tags = Tag::all();
         $categories = Category::all();
-        return view('post.create', compact('categories', 'tags'));
+        return view('admin.post.create', compact('categories', 'tags', 'posts'));
     }
 
 

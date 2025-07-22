@@ -88,5 +88,12 @@ $posts = Post::paginate(10);
 php artisan vendor:publish --tag=laravel-pagination
 
 
+lesson 33
+php artisan ui:auth
+composer require laravel/ui
+
+
+
+
 
 
