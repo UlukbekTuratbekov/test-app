@@ -49,3 +49,4 @@ Route::get('posts/update_or_create', [PostController::class, 'updateOrCreate']);
 Route::get('/main', [MainController::class, 'index'])->name('main.index');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
+
