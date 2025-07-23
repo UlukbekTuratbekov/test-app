@@ -6,23 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Http\Filters\PostFilter;
 use App\Http\Requests\Post\FilterRequest;
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 
 class IndexController extends BaseController
 {
 
-    public function __invoke(FilterRequest $request)
+    public function __invoke(Request $request)
     {
 
-        $data = $request->validated();
-
-        $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
+        $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($request->all())]);
         $posts = Post::filter($filter)->paginate(10);
-
-
-
-//        $posts = Post::paginate(10);
-//        return view('post.index', compact('posts'));
+//        $query = Post::query();
+//
+//        if ($request->get('title')) {
+//            $query->where('title', 'like', "%{$request->get('title')}%");
+//        }
+//        if ($request->get('category_id')) {
+//            $query->where('category_id', $request->get('category_id'));
+//        }
+//        dd($query->toSql());
+//        $posts = $query->paginate(10);
+        return view('post.index', compact('posts'));
 
     }
 

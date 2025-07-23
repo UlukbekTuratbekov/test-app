@@ -32,9 +32,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::prefix('/admin')->name('admin.')->group(function () {
-    Route::get('/post', IndexAdmin::class)->name('admin.post.index');
-    Route::get('/create', CreateAdmin::class)->name('admin.post.create');
+    Route::get('/post', IndexAdmin::class)->name('post.index')->middleware('admin');
+    Route::get('/post/create', CreateAdmin::class)->name('post.create');
 });
+
 
 
 

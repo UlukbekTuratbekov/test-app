@@ -93,6 +93,10 @@ php artisan ui:auth
 composer require laravel/ui
 
 
+lesson 34
+php artisan make:middleware AdminPanelMiddleware
+auth()->user()
+
 
 
 

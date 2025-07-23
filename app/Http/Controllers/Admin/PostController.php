@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Post;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Filters\PostFilter;
@@ -8,9 +8,9 @@ use App\Http\Requests\Post\FilterRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class IndexController extends Controller
+class PostController extends  Controller
 {
-    public function __invoke(Request $request)
+    public function index(Request $request)
     {
         $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($request->all())]);
         $posts = Post::filter($filter)->paginate(10);
